@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>1-0.com — Premium Domain For Sale</title>
+  <meta name="description" content="1-0.com — premium domain ideal for scoreboards, analytics dashboards, sports-tech, voting platforms, and concise branding. Submit an offer to purchase." />
+  <meta property="og:title" content="1-0.com — Premium Domain For Sale" />
+  <meta property="og:description" content="1-0.com — short, memorable domain great for scoreboards, analytics, voting UX, or numeric branding. Contact domain@1-0.com" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#041622" />
+  <link rel="icon" href="/favicon.ico" />
+
+  <style>
+    :root{
+      --max-width:1120px;
+      --bg-deep:#03070a;
+      --panel:#06121a;
+      --muted:#8da0a9;
+      --ink:#e8fbff;
+      --neon-green:#2ef2a3;
+      --neon-cyan:#79d6ff;
+      --accent-amber:#ffd166;
+      --score-bg:rgba(255,255,255,0.03);
+      --glass: rgba(255,255,255,0.03);
+      --radius:14px;
+      --shadow: 0 30px 90px rgba(2,6,8,0.6);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:36px 20px;
+      color:var(--ink);
+      background:
+        radial-gradient(700px 240px at 20% 8%, rgba(46,214,163,0.02), transparent 12%),
+        linear-gradient(180deg,var(--bg-deep) 0%, #041826 100%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      overflow-x:hidden;
+    }
+
+    /* Look chosen: "Digital Scoreboard"
+       - dark scenic backdrop, neon score tiles, subtle flicker and scanline textures
+       - numeric motifs, glows for neon accent colors; pointer-events:none for decorative layers
+    */
+    .bg { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:visible; }
+
+    .scanlines {
+      position:fixed;
+      left:50%;
+      top:6%;
+      transform:translateX(-50%);
+      width:1100px;
+      height:320px;
+      z-index:0;
+      pointer-events:none;
+      background-image:
+        linear-gradient(0deg, rgba(255,255,255,0.01) 1px, transparent 1px);
+      background-size:100% 6px;
+      opacity:0.06;
+      border-radius:18px;
+    }
+
+    .scoreboard {
+      position:fixed;
+      left:50%;
+      top:14%;
+      transform:translateX(-50%);
+      width:720px;
+      height:120px;
+      z-index:0;
+      pointer-events:none;
+      border-radius:12px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: 0 18px 46px rgba(0,0,0,0.45) inset;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      opacity:0.9;
+    }
+
+    .score-dot {
+      position:absolute;
+      left:8%;
+      top:10%;
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(46,242,163,0.9), rgba(46,242,163,0.35));
+      filter: blur(6px);
+      opacity:0.12;
+    }
+
+    .floaters { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:visible; }
+
+    .badge {
+      position:absolute;
+      width:64px;
+      height:64px;
+      background-size:contain;
+      background-repeat:no-repeat;
+      opacity:0.10;
+      will-change:transform,opacity;
+      filter: drop-shadow(0 12px 28px rgba(0,0,0,0.6));
+    }
+
+    @keyframes neon {
+      0% { transform: translateY(0) scale(1); opacity:0.08; filter:drop-shadow(0 6px 26px rgba(46,242,163,0.06)); }
+      50% { transform: translateY(-12px) scale(1.03); opacity:0.20; filter:drop-shadow(0 18px 46px rgba(46,242,163,0.12)); }
+      100% { transform: translateY(0) scale(1); opacity:0.08; filter:drop-shadow(0 6px 26px rgba(46,242,163,0.06)); }
+    }
+
+    .container{
+      width:100%;
+      max-width:var(--max-width);
+      padding:36px;
+      border-radius:18px;
+      background: linear-gradient(180deg, rgba(4,16,22,0.94), rgba(3,8,12,0.92));
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.03);
+      position:relative;
+      z-index:2;
+    }
+
+    header{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:16px;
+    }
+
+    .brand{ display:flex; gap:14px; align-items:center; }
+    .logo{
+      width:92px;
+      height:92px;
+      border-radius:14px;
+      background: linear-gradient(135deg,var(--neon-green), var(--neon-cyan));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#041014;
+      font-weight:900;
+      font-size:20px;
+      box-shadow: 0 12px 36px rgba(46,242,163,0.06);
+      flex-shrink:0;
+    }
+
+    h1{ margin:0; font-size:28px; color:var(--ink); }
+    p.lead{ margin:6px 0 0; color:var(--muted); font-size:14px; max-width:760px; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:28px;
+      align-items:start;
+      margin-top:12px;
+    }
+
+    .hero {
+      background: linear-gradient(90deg, rgba(46,242,163,0.015), rgba(121,214,255,0.01));
+      padding:18px;
+      border-radius:12px;
+      color:var(--ink);
+      border:1px solid rgba(255,255,255,0.03);
+      display:flex;
+      gap:18px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .hero h2{ margin:0 0 8px 0; font-size:22px; color:var(--neon-green); }
+    .hero p{ margin:0; color:var(--muted); }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      color:var(--ink);
+      padding:22px;
+      border-radius:14px;
+      box-shadow: 0 10px 34px rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.02);
+      max-width:820px;
+    }
+
+    h2.section { margin-top:0; font-size:20px; color:var(--neon-cyan); }
+    .features ul{ margin:0; padding-left:18px; color:var(--muted); }
+    .features li{ margin-bottom:10px; }
+
+    .samples { display:flex; gap:12px; margin-top:12px; flex-wrap:wrap; }
+    .sample {
+      width:160px;
+      height:92px;
+      border-radius:12px;
+      background: var(--score-bg);
+      border:1px solid rgba(255,255,255,0.03);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:800;
+      color:var(--muted);
+      text-align:center;
+      padding:12px;
+    }
+
+    .cta-row{ display:flex; gap:12px; margin-top:18px; flex-wrap:wrap; align-items:center; }
+    .btn{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding:10px 16px;
+      border-radius:999px;
+      font-weight:800;
+      cursor:pointer;
+      text-decoration:none;
+      border:0;
+      color:#041014;
+    }
+    .btn-primary{
+      background: linear-gradient(90deg,var(--neon-green), var(--neon-cyan));
+      box-shadow: 0 10px 30px rgba(46,242,163,0.08);
+    }
+    .btn-ghost{
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.03);
+      color:var(--muted);
+    }
+
+    .price { margin-top:12px; font-weight:800; color:var(--ink); font-size:16px; }
+    .muted-small { color:var(--muted); font-size:13px; margin-top:6px; }
+
+    .contact-card{
+      position:sticky;
+      top:32px;
+      align-self:start;
+      background: linear-gradient(180deg, rgba(4,12,14,0.85), rgba(3,8,12,0.8));
+      padding:18px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.02);
+      box-shadow: 0 8px 26px rgba(0,0,0,0.6);
+      max-width:360px;
+    }
+
+    .contact-card h3{ margin:0 0 8px 0; font-size:16px; color:var(--neon-green); }
+    .contact-email, .contact-email a{
+      display:inline-block;
+      font-weight:800;
+      color:var(--neon-cyan);
+      font-size:0.98rem;
+      text-decoration:none;
+    }
+
+    form label{ display:block; font-size:13px; color:var(--muted); margin-bottom:6px; }
+    form input, form textarea {
+      width:100%;
+      padding:10px 12px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.03);
+      background: rgba(255,255,255,0.01);
+      color:var(--ink);
+      font-size:14px;
+      margin-bottom:12px;
+    }
+    form textarea{ min-height:110px; resize:vertical; }
+
+    .resources {
+      margin-top:14px;
+      font-size:13px;
+      color:var(--muted);
+      border-top:1px dashed rgba(255,255,255,0.02);
+      padding-top:12px;
+    }
+
+    .resources a { color:var(--neon-cyan); font-weight:700; text-decoration:none; }
+
+    footer{ margin-top:18px; color:var(--muted); font-size:13px; text-align:center; }
+
+    @media (max-width:980px){
+      .grid{ grid-template-columns: 1fr; gap:18px; }
+      .contact-card{ position:relative; top:auto; width:100%; max-width:none; }
+      .container{ padding:24px; }
+      .logo{ width:72px; height:72px; border-radius:14px; }
+      h1{ font-size:22px; }
+      .scanlines, .scoreboard, .floaters { display:none; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"WebSite",
+        "url":"https://1-0.com",
+        "name":"1-0.com",
+        "description":"1-0.com — premium domain suitable for scoreboard UX, analytics dashboards, concise branding, and numeric-first products."
+      },
+      {
+        "@type":"ContactPoint",
+        "contactType":"sales",
+        "email":"domain@1-0.com"
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="bg" aria-hidden="true">
+    <div class="scanlines" aria-hidden="true"></div>
+    <div class="scoreboard" aria-hidden="true">
+      <div style="font-weight:900; font-size:72px; color:var(--neon-green); letter-spacing:6px; mix-blend-mode:screen; opacity:0.95;">1 − 0</div>
+    </div>
+    <div class="floaters" id="floaters" aria-hidden="true"></div>
+  </div>
+
+  <main class="container" role="main" aria-labelledby="main-heading">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">10</div>
+        <div>
+          <h1 id="main-heading">1-0.com</h1>
+          <p class="lead">Premium domain for scoreboard UX, concise branding, analytics, voting, and numeric-first products.</p>
+        </div>
+      </div>
+
+      <div style="text-align:right">
+        <div style="color:var(--muted);font-size:13px">For inquiries</div>
+        <div class="contact-email"><a href="mailto:domain@1-0.com">domain@1-0.com</a></div>
+      </div>
+    </header>
+
+    <div class="hero" role="note" aria-live="polite" aria-labelledby="hero-title">
+      <div>
+        <h2 id="hero-title">A succinct, numeric-first brand</h2>
+        <p>1-0.com is short, evocative, and ideal for scoreboards, results-focused UIs, compact branding, or any product that benefits from strong numeric identity.</p>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#" id="inquireBtn">Make an Offer</a>
+          <a class="btn btn-ghost" href="mailto:domain@1-0.com?subject=Domain%20Offer%20-%201-0.com">Email Now</a>
+        </div>
+      </div>
+
+      <div style="min-width:200px; text-align:center">
+        <div style="color:var(--muted); font-size:13px">Domain</div>
+        <div style="font-weight:900; font-size:20px; margin-top:6px">1-0.com</div>
+        <div style="color:var(--muted); font-size:13px; margin-top:8px">Serious offers only.</div>
+      </div>
+    </div>
+
+    <section class="grid" aria-label="Main content">
+      <div>
+        <article class="panel" aria-labelledby="why-title">
+          <h2 id="why-title" class="section">Why 1-0.com?</h2>
+          <p class="lead">A very short, memorable domain that communicates numeric outcomes and clarity. Great for scoreboards, competitive apps, voting/result platforms, analytics dashboards, and concise consumer brands.</p>
+
+          <div class="features" style="margin-top:12px">
+            <ul>
+              <li>Ultra-short, high recall — stands out in marketing and product UIs</li>
+              <li>Fits sports-tech, voting/ballot UIs, analytics dashboards, and compact branding</li>
+              <li>Brandable across web, mobile, app icons and embedded scoreboard widgets</li>
+            </ul>
+          </div>
+
+          <div class="samples" aria-hidden="false">
+            <div class="sample">Scoreboard UI</div>
+            <div class="sample">Analytics Widget</div>
+            <div class="sample">Voting / Results</div>
+            <div class="sample">Numeric Brand</div>
+          </div>
+        </article>
+
+        <article class="panel" style="margin-top:18px" aria-labelledby="about-title">
+          <h3 id="about-title" style="margin-top:0">About this domain</h3>
+          <p class="lead">1-0.com is a premium domain available for transfer.</p>
+
+          <ul style="color:var(--muted);margin-top:12px">
+            <li>Well-suited to founders, product teams and sports/analytics startups</li>
+            <li>Useful for integrations with dashboards, streaming overlays, APIs and widgets</li>
+            <li>Transfer-ready — We use escrow to ensure a successful and secure transaction for both the buyer and the seller.</li>
+          </ul>
+
+          <div class="resources" aria-labelledby="resources-title">
+            <div id="resources-title" style="font-weight:800; margin-bottom:8px">Helpful resource</div>
+            <div><a href="https://corelli.com/domains.html" target="_blank" rel="noopener noreferrer">How To Choose A Domain Name</a></div>
+          </div>
+        </article>
+      </div>
+
+      <aside class="contact-card" aria-label="Contact & offer">
+        <div>
+          <h3 style="margin-top:0">Contact & Offer</h3>
+          <p style="margin-top:6px;color:var(--muted)">Submit an offer — this form opens your email client with the details prefilled. Or email <a href="mailto:domain@1-0.com" class="contact-email">domain@1-0.com</a>.</p>
+
+          <form id="inquiryForm" onsubmit="handleSubmit(event)" aria-label="Domain offer form">
+            <label for="name">Your name</label>
+            <input id="name" name="name" type="text" placeholder="Jane Doe" required />
+
+            <label for="email">Your email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+
+            <label for="offer">Your offer (USD)</label>
+            <input id="offer" name="offer" type="text" placeholder="Enter your offer (USD)" required />
+
+            <label for="company">Company (optional)</label>
+            <input id="company" name="company" type="text" placeholder="Your company or organization" />
+
+            <label for="country">Country</label>
+            <input id="country" name="country" type="text" placeholder="Your country" required />
+
+            <label for="phone">Phone number (optional)</label>
+            <input id="phone" name="phone" type="tel" />
+
+            <label for="message">Message (questions, timeline, escrow preference)</label>
+            <textarea id="message" name="message" placeholder="Hi — I'm submitting an offer for 1-0.com. Please share transfer instructions and next steps."></textarea>
+
+            <button class="btn btn-primary" type="submit" style="width:100%; margin-top:6px">Send Offer</button>
+          </form>
+
+          <footer style="margin-top:10px; text-align:left; color:var(--muted); font-size:13px">
+            Prefer a direct email? <a href="mailto:domain@1-0.com" style="color:var(--neon-cyan)" class="contact-email">domain@1-0.com</a>
+          </footer>
+        </div>
+      </aside>
+    </section>
+
+    <footer>
+      &copy; 2025 1-0.com. All rights reserved.
+    </footer>
+  </main>
+
+  <script>
+    // floating badges: tiny scoreboard-themed icons (hash, result, dot, pulse)
+    (function placeFloaters(){
+      const layer = document.getElementById('floaters');
+      if(!layer) return;
+
+      const svgs = {
+        hash: encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><rect x='6' y='10' width='36' height='28' rx='6' fill='%23000000' opacity='0.04'/><text x='50%' y='60%' font-size='18' text-anchor='middle' fill='%23FFFFFF' opacity='0.08' font-family='monospace'>#</text></svg>`),
+        result: encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect x='6' y='10' width='52' height='44' rx='8' fill='%23000000' opacity='0.03'/><text x='50%' y='60%' font-size='28' text-anchor='middle' fill='%23' >1-0</text></svg>`),
+        dot: encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><circle cx='24' cy='24' r='8' fill='%232EF2A3'/></svg>`),
+        pulse: encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><path d='M6 28 L16 18 L22 26 L30 12 L42 32' stroke='%2379D6FF' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round' /></svg>`)
+      };
+
+      const items = [
+        {svg:svgs.hash, left:'12%', top:'18%', size:72, dur:9000},
+        {svg:svgs.dot, left:'78%', top:'16%', size:60, dur:11000},
+        {svg:svgs.pulse, left:'48%', top:'66%', size:64, dur:10000},
+        {svg:svgs.result, left:'84%', top:'54%', size:72, dur:12000}
+      ];
+
+      items.forEach(it=>{
+        const el = document.createElement('div');
+        el.className = 'badge';
+        el.style.left = it.left;
+        el.style.top = it.top;
+        el.style.width = it.size + 'px';
+        el.style.height = it.size + 'px';
+        el.style.backgroundImage = `url("data:image/svg+xml;utf8,${it.svg}")`;
+        el.style.animation = `neon ${it.dur}ms ease-in-out ${Math.random()*1200}ms infinite`;
+        el.style.opacity = 0.06 + Math.random()*0.18;
+        layer.appendChild(el);
+      });
+    })();
+
+    // Compose mailto and open user's email client
+    function handleSubmit(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const offer = document.getElementById('offer').value.trim();
+      const company = document.getElementById('company').value.trim();
+      const country = document.getElementById('country').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      const subject = encodeURIComponent('Domain Offer - 1-0.com');
+      const bodyText =
+        `Name: ${name}\n` +
+        `Email: ${email}\n` +
+        `Company: ${company || '(not provided)'}\n` +
+        `Offer (USD): ${offer}\n` +
+        `Country: ${country}\n` +
+        `Phone: ${phone || '(not provided)'}\n\n` +
+        `Message:\n${message}\n\n---\nSent from 1-0.com offer form`;
+
+      window.location.href = `mailto:domain@1-0.com?subject=${subject}&body=${encodeURIComponent(bodyText)}`;
+    }
+
+    document.getElementById('inquiryForm').addEventListener('submit', handleSubmit);
+
+    // Inquire button: scroll to form on mobile, open mailto on desktop
+    document.getElementById('inquireBtn').addEventListener('click', function(e){
+      e.preventDefault();
+      const form = document.getElementById('inquiryForm');
+      if(window.innerWidth < 900){
+        form.scrollIntoView({behavior:'smooth', block:'center'});
+        form.querySelector('input')?.focus();
+      } else {
+        const subject = encodeURIComponent('Domain Offer - 1-0.com');
+        const body = encodeURIComponent('Hi — I would like to make an offer for 1-0.com. Please reply with transfer instructions and next steps.');
+        window.location.href = `mailto:domain@1-0.com?subject=${subject}&body=${body}`;
+      }
+    });
+  </script>
+</body>
+</html>
